@@ -111,22 +111,26 @@ DNS queries for FQDNs (e.g., www.google.com) resolved before TLS start
 
 Observed via UDP port 53 responses with A/AAAA records
 
-**wireshark**
+wireshark
 
 **DNS**
+
 Key field: Answers → Address: x.x.x.x
 
-✅ Encrypted Application Data**
-Post-handshake records show TLS content-type 23
+**✅ Encrypted Application Data**
 
-Decryption not visible in Wireshark (as expected); validated via mitmproxy
+- Post-handshake records show TLS content-type 23
+
+- Decryption not visible in Wireshark (as expected); validated via mitmproxy
+
 
 wireshark
 
 tls.record.content_type == 23
-🪓 Decrypted Payload Inspection (via mitmproxy)
 
 ---
+
+ **Decrypted Payload Inspection (via mitmproxy)**
 
 **🔍 Flow List View**
 

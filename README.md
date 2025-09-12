@@ -37,8 +37,7 @@ Packet capture: Wireshark (capture filter on Android IP)
 Transport: Wi-Fi (WPA2 PSK; prior decryption simulation covered in previous repo)
 
 **⚙️ Configuration & Command Reference**
-bash
-Copy code
+
 # Obtain local IP (for proxy endpoint configuration)
 ifconfig
 
@@ -82,7 +81,7 @@ Finished: Indicates session encryption state established
 
 Captured via:
 
-wireshark
+**wireshark**
 
 tls.handshake.type == 1  # Client Hello
 tls.handshake.type == 2  # Server Hello
@@ -108,7 +107,9 @@ Decryption not visible in Wireshark (as expected); validated via mitmproxy
 
 tls.record.content_type == 23
 🪓 Decrypted Payload Inspection (via mitmproxy)
-🔍 Flow List View
+
+**🔍 Flow List View**
+
 Screenshot: screenshots/mitmproxy-flow-list.png
 
 Each flow represents a successful TLS re-termination and HTTP-layer capture
@@ -124,7 +125,8 @@ Headers: User-Agent, Host, Accept, Cookie
 
 Proves L7 visibility post-TLS termination
 
-🔐 Individual Flow: Response
+**🔐 Individual Flow: Response**
+
 Screenshot: screenshots/mitmproxy-response.png
 
 200 OK, Content-Type: image/jpeg
@@ -134,14 +136,17 @@ Content-length and response body (truncated for brevity)
 Confirms bidirectional inspection capability
 
 **📸 Wireshark Screenshot Index**
-Screenshot	Description
-tcp-handshake.png	SYN → SYN/ACK → ACK between Android and proxy
-client-hello.png	TLS ClientHello with SNI and cipher spec
-server-hello-cert.png	TLS ServerHello + forged certificate (issuer = mitmproxy)
-dns-query.png	A/AAAA record DNS resolution for target FQDN
-tls-encrypted-data.png	TLS application data packets (post-handshake)
 
-🧠 Observations
+Screenshot	                    Description
+tcp-handshake.png	        SYN → SYN/ACK → ACK between Android and proxy
+client-hello.png	        TLS ClientHello with SNI and cipher spec
+server-hello-cert.png	    TLS ServerHello + forged certificate (issuer = mitmproxy)
+dns-query.png	            A/AAAA record DNS resolution for target FQDN
+tls-encrypted-data.png	    TLS application data packets (post-handshake)
+
+
+**🧠 Observations**
+
 The Android device accepted a proxy-forged certificate chain due to explicit CA installation.
 
 TLS handshake proceeded without errors, despite termination and re-initiation.
@@ -152,12 +157,13 @@ DNS remains observable pre-TLS unless DoH/DoT is enforced by the client.
 
 No SNI encryption observed (as expected on Android 8.0 with TLS 1.2 defaults).
 
-🛑 Limitations / Notes
+**🛑 Limitations / Notes**
+
 TLS 1.3 with Encrypted Client Hello (ECH) is not supported in this scenario.
 
 Modern apps using certificate pinning will fail to complete handshakes.
 
 Android > 10 restricts CA trust scope to system-level CAs unless user-deployed apps explicitly allow them.
 
-🧩 Conclusion
+**🧩 Conclusion**
 This repo simulates the operational logic behind enterprise-grade TLS interception mechanisms using open-source tools in a lab-controlled environment. It bridges the gap between network transport capture (Wireshark) and decrypted application flow inspection (mitmproxy), aligning with practices used in DLP, APT sandboxing, and threat hunting infrastructure.

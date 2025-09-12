@@ -83,7 +83,7 @@ sudo service apache2 start
 
 **🧪 Protocol-Level Artifact Index**
 
-✅ TCP 3-Way Handshake (Phone → Proxy)
+**✅ TCP 3-Way Handshake** (Phone → Proxy)
 SYN / SYN-ACK / ACK exchange confirms initial TCP socket creation
 
 Critical for establishing reliable Layer 4 channel prior to TLS negotiation
@@ -98,8 +98,7 @@ Certificate message: X.509 with full chain; subject CN = target domain
 Finished: Indicates session encryption state established
 
 Captured via:
-
-**wireshark**
+wireshark
 
 tls.handshake.type == 1  # Client Hello
 tls.handshake.type == 2  # Server Hello

@@ -41,24 +41,28 @@ Packet capture: Wireshark (capture filter on Android IP)
 
 Transport: Wi-Fi (WPA2 PSK; prior decryption simulation covered in previous repo)
 
+---
+
 **⚙️ Configuration & Command Reference**
 
- Obtain local IP (for proxy endpoint configuration)
+** Obtain local IP (for proxy endpoint configuration)**
 ifconfig
 
- Launch mitmproxy in explicit mode on TCP 8080
+ **Launch mitmproxy in explicit mode on TCP 8080**
 mitmproxy --mode regular --listen-port 8080
 
- Capture flows to log file (optional)
+** Capture flows to log file (optional)**
 mitmdump -w my_log.log
 
- Inspect previously captured flows
+ **Inspect previously captured flows**
 mitmdump -r my_log.log
 
- Start Wireshark with interface bound to the active adapter
+ **Start Wireshark with interface bound to the active adapte**r
  Filter set: ip.addr == <android_client_ip>
 Certificate Installation (Phone)
 Cert transferred via Bluetooth
+
+****
 
 **Alternatively, run temporary HTTP server for pull:**
 

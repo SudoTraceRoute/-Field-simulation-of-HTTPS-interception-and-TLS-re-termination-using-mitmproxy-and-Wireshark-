@@ -24,10 +24,15 @@ No GUI walkthroughs or basic tutorials are provided or intended.
 
 
 [Android Client]
-    ↓ (TLS over Proxy, trusted mitm CA)
+
+ ↓ (TLS over Proxy, trusted mitm CA)
+    
 [Linux Host running mitmproxy:8080]
-    ↓ (TLS re-initiation)
+
+↓ (TLS re-initiation)
+    
 [Remote Web Servers (HTTPS)]
+
 Client: Android 8.0 (certificate manually installed)
 
 Proxy: mitmproxy running on PC, port 8080, regular mode
@@ -38,33 +43,34 @@ Transport: Wi-Fi (WPA2 PSK; prior decryption simulation covered in previous repo
 
 **⚙️ Configuration & Command Reference**
 
-# Obtain local IP (for proxy endpoint configuration)
+ Obtain local IP (for proxy endpoint configuration)
 ifconfig
 
-# Launch mitmproxy in explicit mode on TCP 8080
+ Launch mitmproxy in explicit mode on TCP 8080
 mitmproxy --mode regular --listen-port 8080
 
-# Capture flows to log file (optional)
+ Capture flows to log file (optional)
 mitmdump -w my_log.log
 
-# Inspect previously captured flows
+ Inspect previously captured flows
 mitmdump -r my_log.log
 
-# Start Wireshark with interface bound to the active adapter
-# Filter set: ip.addr == <android_client_ip>
+ Start Wireshark with interface bound to the active adapter
+ Filter set: ip.addr == <android_client_ip>
 Certificate Installation (Phone)
 Cert transferred via Bluetooth
 
 **Alternatively, run temporary HTTP server for pull:**
 
-# Option A: Python HTTP server
+ Option A: Python HTTP server
 python3 -m http.server 8081
 
-# Option B: Apache (pre-installed)
+ Option B: Apache (pre-installed)
 sudo service apache2 start
 Client manually installs .pem or .crt file under trusted credentials (user)
 
 **🧪 Protocol-Level Artifact Index**
+
 ✅ TCP 3-Way Handshake (Phone → Proxy)
 SYN / SYN-ACK / ACK exchange confirms initial TCP socket creation
 

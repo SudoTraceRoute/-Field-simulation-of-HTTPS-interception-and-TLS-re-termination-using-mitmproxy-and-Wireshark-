@@ -45,33 +45,41 @@ Transport: Wi-Fi (WPA2 PSK; prior decryption simulation covered in previous repo
 
 **⚙️ Configuration & Command Reference**
 
-** Obtain local IP (for proxy endpoint configuration)**
+- Obtain local IP (for proxy endpoint configuration)
 ifconfig
 
- **Launch mitmproxy in explicit mode on TCP 8080**
+- Launch mitmproxy in explicit mode on TCP 8080
 mitmproxy --mode regular --listen-port 8080
 
-** Capture flows to log file (optional)**
+- Capture flows to log file (optional)
 mitmdump -w my_log.log
 
- **Inspect previously captured flows**
+- Inspect previously captured flows
 mitmdump -r my_log.log
 
- **Start Wireshark with interface bound to the active adapte**r
- Filter set: ip.addr == <android_client_ip>
+- Start Wireshark with interface bound to the active adapte
+
+Filter set: ip.addr == <android_client_ip>
+
 Certificate Installation (Phone)
+
 Cert transferred via Bluetooth
 
-****
+---
+
+
 
 **Alternatively, run temporary HTTP server for pull:**
 
- Option A: Python HTTP server
+- Option A: Python HTTP server
+- 
 python3 -m http.server 8081
 
- Option B: Apache (pre-installed)
+- Option B: Apache (pre-installed)
 sudo service apache2 start
 Client manually installs .pem or .crt file under trusted credentials (user)
+
+---
 
 **🧪 Protocol-Level Artifact Index**
 
@@ -107,16 +115,18 @@ Observed via UDP port 53 responses with A/AAAA records
 
 **DNS**
 Key field: Answers → Address: x.x.x.x
-**
+
 ✅ Encrypted Application Data**
 Post-handshake records show TLS content-type 23
 
 Decryption not visible in Wireshark (as expected); validated via mitmproxy
 
-**wireshark**
+wireshark
 
 tls.record.content_type == 23
 🪓 Decrypted Payload Inspection (via mitmproxy)
+
+---
 
 **🔍 Flow List View**
 
@@ -126,6 +136,8 @@ Each flow represents a successful TLS re-termination and HTTP-layer capture
 
 Visible endpoints, status codes, and method types
 
+---
+
 **🔓 Individual Flow: Request**
 Screenshot: screenshots/mitmproxy-request.png
 
@@ -134,6 +146,8 @@ GET /news/photo.jpg HTTP/1.1
 Headers: User-Agent, Host, Accept, Cookie
 
 Proves L7 visibility post-TLS termination
+
+---
 
 **🔐 Individual Flow: Response**
 
@@ -145,6 +159,8 @@ Content-length and response body (truncated for brevity)
 
 Confirms bidirectional inspection capability
 
+---
+
 **📸 Wireshark Screenshot Index**
 
 Screenshot	                    Description
@@ -154,6 +170,7 @@ server-hello-cert.png	    TLS ServerHello + forged certificate (issuer = mitmpro
 dns-query.png	            A/AAAA record DNS resolution for target FQDN
 tls-encrypted-data.png	    TLS application data packets (post-handshake)
 
+---
 
 **🧠 Observations**
 
@@ -167,6 +184,8 @@ DNS remains observable pre-TLS unless DoH/DoT is enforced by the client.
 
 No SNI encryption observed (as expected on Android 8.0 with TLS 1.2 defaults).
 
+---
+
 **🛑 Limitations / Notes**
 
 TLS 1.3 with Encrypted Client Hello (ECH) is not supported in this scenario.
@@ -174,6 +193,8 @@ TLS 1.3 with Encrypted Client Hello (ECH) is not supported in this scenario.
 Modern apps using certificate pinning will fail to complete handshakes.
 
 Android > 10 restricts CA trust scope to system-level CAs unless user-deployed apps explicitly allow them.
+
+---
 
 **🧩 Conclusion**
 This repo simulates the operational logic behind enterprise-grade TLS interception mechanisms using open-source tools in a lab-controlled environment. It bridges the gap between network transport capture (Wireshark) and decrypted application flow inspection (mitmproxy), aligning with practices used in DLP, APT sandboxing, and threat hunting infrastructure.

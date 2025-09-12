@@ -140,9 +140,9 @@ Each flow represents a successful TLS re-termination and HTTP-layer capture
 
 Visible endpoints, status codes, and method types
 
----
 
 **🔓 Individual Flow: Request**
+
 Screenshot: screenshots/mitmproxy-request.png
 
 GET /news/photo.jpg HTTP/1.1
@@ -151,7 +151,6 @@ Headers: User-Agent, Host, Accept, Cookie
 
 Proves L7 visibility post-TLS termination
 
----
 
 **🔐 Individual Flow: Response**
 
@@ -167,26 +166,26 @@ Confirms bidirectional inspection capability
 
 **📸 Wireshark Screenshot Index**
 
-Screenshot	                    Description
-tcp-handshake.png	        SYN → SYN/ACK → ACK between Android and proxy
-client-hello.png	        TLS ClientHello with SNI and cipher spec
-server-hello-cert.png	    TLS ServerHello + forged certificate (issuer = mitmproxy)
-dns-query.png	            A/AAAA record DNS resolution for target FQDN
+**Screenshot	 **                  ** Description**
+tcp-handshake.png	         SYN → SYN/ACK → ACK between Android and proxy
+client-hello.png	          TLS ClientHello with SNI and cipher spec
+server-hello-cert.png	     TLS ServerHello + forged certificate (issuer = mitmproxy)
+dns-query.png	             A/AAAA record DNS resolution for target FQDN
 tls-encrypted-data.png	    TLS application data packets (post-handshake)
 
 ---
 
 **🧠 Observations**
 
-The Android device accepted a proxy-forged certificate chain due to explicit CA installation.
+- The Android device accepted a proxy-forged certificate chain due to explicit CA installation.
 
-TLS handshake proceeded without errors, despite termination and re-initiation.
+- TLS handshake proceeded without errors, despite termination and re-initiation.
 
-mitmproxy seamlessly forged certs per domain, maintaining subject CN/SAN integrity.
+- mitmproxy seamlessly forged certs per domain, maintaining subject CN/SAN integrity.
 
-DNS remains observable pre-TLS unless DoH/DoT is enforced by the client.
+- DNS remains observable pre-TLS unless DoH/DoT is enforced by the client.
 
-No SNI encryption observed (as expected on Android 8.0 with TLS 1.2 defaults).
+- No SNI encryption observed (as expected on Android 8.0 with TLS 1.2 defaults).
 
 ---
 

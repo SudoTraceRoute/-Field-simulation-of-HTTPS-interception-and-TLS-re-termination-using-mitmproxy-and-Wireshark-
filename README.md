@@ -59,11 +59,11 @@ mitmdump -r my_log.log
 
 - Start Wireshark with interface bound to the active adapte
 
-Filter set: ip.addr == <android_client_ip>
+- Filter set: ip.addr == <android_client_ip>
 
-Certificate Installation (Phone)
+- Certificate Installation (Phone)
 
-Cert transferred via Bluetooth
+- Cert transferred via Bluetooth
 
 ---
 
@@ -72,12 +72,12 @@ Cert transferred via Bluetooth
 **Alternatively, run temporary HTTP server for pull:**
 
 - Option A: Python HTTP server
-- 
-python3 -m http.server 8081
+  python3 -m http.server 8081
 
 - Option B: Apache (pre-installed)
-sudo service apache2 start
-Client manually installs .pem or .crt file under trusted credentials (user)
+  sudo service apache2 start
+  
+- Client manually installs .pem or .crt file under trusted credentials (user)
 
 ---
 

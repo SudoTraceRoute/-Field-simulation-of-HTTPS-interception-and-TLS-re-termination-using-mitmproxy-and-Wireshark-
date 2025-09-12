@@ -166,7 +166,8 @@ Confirms bidirectional inspection capability
 
 **📸 Wireshark Screenshot Index**
 
-Screenshot	                  
+Screenshot	 
+
 tcp-handshake.png	         
 client-hello.png	          
 server-hello-cert.png	     
@@ -175,10 +176,15 @@ tls-encrypted-data.png
 
 
 Description
+
 SYN → SYN/ACK → ACK between Android and proxy
+
 TLS ClientHello with SNI and cipher spec
+
 TLS ServerHello + forged certificate (issuer = mitmproxy)
+
 A/AAAA record DNS resolution for target FQDN
+
 TLS application data packets (post-handshake)
 
 

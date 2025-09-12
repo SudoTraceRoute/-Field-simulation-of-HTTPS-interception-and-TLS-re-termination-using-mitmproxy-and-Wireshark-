@@ -22,7 +22,7 @@ No GUI walkthroughs or basic tutorials are provided or intended.
 
 ## 🧱 System Architecture
 
-```text
+
 [Android Client]
     ↓ (TLS over Proxy, trusted mitm CA)
 [Linux Host running mitmproxy:8080]

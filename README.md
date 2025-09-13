@@ -6,6 +6,9 @@ The illusion of end-to-end encryption collapses under the weight of a trusted ro
 
 ## 🧭 Project Overview
 
+TLS fundamentally aims to provide end-to-end encryption for all transmitted data, employing cryptography to ensure that only the involved parties can decipher the information. 
+Presently, virtually every service requires secure connections through TLS. Major browsers enforce this by not allowing users to access websites lacking a valid TLS connection.
+
 This repository demonstrates the implementation and analysis of TLS interception in a local environment, simulating enterprise-grade HTTPS decryption and passive DPI workflows. 
 A rogue CA is deployed to an Android-based client (v8.0) to facilitate trust in an intercepting MITM proxy. 
 Traffic is then programmatically correlated with a lower-level packet capture to analyze the handshake lifecycle, certificate forging behavior, and decrypted HTTP-layer payloads.
